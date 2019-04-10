@@ -24,7 +24,21 @@
             <div v-if="show" class="row">
                 <div v-for="photo in photos" class="col-md-6 ">
                     <div class="card mb-4 shadow-sm ">
-                        <img class="card-img-top" width="200 " height="350 " :src="photo.src.original">
+                       <div class="item">
+                            <img class="card-img-top" width="200 " height="350 " :src="photo.src.original">
+                        </div>
+                        <ul class="list-unstyled list-inline list">
+                            <li>
+                                <p>photo by : {{photo.photographer}} </p>
+                            </li>
+                            <li> 
+                                <a href="photo.original" download>
+                                    <button>download</button>
+                                </a>
+                            </li>
+                        </ul>
+                            
+
                     </div>
                 </div>
                 <nav aria-label="Page navigation example">
@@ -46,6 +60,7 @@
                 prev: '',
                 show: false,
                 photos: [],
+
             },
             methods: {
                 search(query) {
