@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Search_result</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Mali|Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Charmonman|Playfair+Display|Ubuntu" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" rel="stylesheet">
+    <link href="assets/css/style_load.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app" class="main-area">
+        <div class="container">
+            <div class="home">
+                <h2>
+                    <a href="index.html">Home</a>
+                </h2>
+            </div>
+            <div v-if="show" class="row">
+                <div v-for="photo in photos" class="col-md-6 ">
+                    <div class="card mb-4 shadow-sm ">
+                        <img class="card-img-top" width="200 " height="350 " :src="photo.src.original">
+                    </div>
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a @click="search( prev ) " class="page-link " href="# ">Previous</a></li>
+                        <li class="page-item "><a @click="search( next ) " class="page-link " href="# ">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js "></script>
+    <script>
+        new Vue({
+            el: "#app ",
+            data: {
+                next: '',
+                prev: '',
+                show: false,
+                photos: [],
+            },
+            methods: {
+                search(query) {
+                    this.show = false;
+                    const vm = this;
+                    axios.get(query, {
+                            headers: {
+                                'Authorization': '563492ad6f91700001000001a1ee1cc362cf4d44a37a54b2a1a8fd08',
+                            },
+                        })
+                        .then(function(response) {
+                            vm.photos = response.data.photos;
+                            vm.next = response.data.next_page;
+                            vm.prev = response.data.prev_page;
+                            vm.show = true;
+                        })
+                }
+            },
+            created() {
+                var urlParams = new URLSearchParams(location.search);
+                var param = urlParams.get('query');
+                this.search(`https://api.pexels.com/v1/search?query=${param}&per_page=20&page=1`);
+            }
+        });
+    </script>
+</body>
+
+</html>

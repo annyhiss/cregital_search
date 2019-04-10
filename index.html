@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>search</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Mali|Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Charmonman|Playfair+Display|Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-area">
+        <div class="container-fluid">
+            <div class="search-page" id="search-box">
+                <div class="search">
+                    <div class="search-box">
+                        <h1>Search For Nice Pics</h1>
+                        <input type="text" placeholder="Search" id="query">
+                        <button onclick="search()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function search() {
+                param = document.getElementById('query').value;
+                console.log(param);
+                location.href = `search.html?query=${param}`;
+            }
+        </script>
+</body>
+
+</html>
